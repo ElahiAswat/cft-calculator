@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CFT Calculator</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1a73e8, #00bfa5);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      color: #333;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
+      color: #1a73e8;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: #666;
+    }
+
+    .dimension {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .dimension label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .inputs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      background: #1a73e8;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #155fc1;
+    }
+
+    #resultBox {
+      margin-top: 1.5rem;
+      background: #f1f3f4;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    #result {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a73e8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📦 CFT Calculator</h1>
+    <p>Enter dimensions in feet and inches to calculate cubic feet (CFT).</p>
+    
+    <form id="cftForm">
+      <div class="dimension">
+        <label>Length</label>
+        <div class="inputs">
+          <input type="number" id="lengthFt" placeholder="Feet" min="0">
+          <input type="number" id="lengthIn" placeholder="Inches" min="0" max="11">
+        </div>
+      </div>
+
+      <div class="dimension">
+        <label>Width</label>
+        <div class="inputs">
+          <input type="number" id="widthFt" placeholder="Feet" min="0">
+          <input type="number" id="widthIn" placeholder="Inches" min="0" max="11">
+        </div>
+      </div>
+
+      <div class="dimension">
+        <label>Height</label>
+        <div class="inputs">
+          <input type="number" id="heightFt" placeholder="Feet" min="0">
+          <input type="number" id="heightIn" placeholder="Inches" min="0" max="11">
+        </div>
+      </div>
+
+      <button type="button" id="calculateBtn">Calculate CFT</button>
+    </form>
+
+    <div id="resultBox">
+      <h2>Result:</h2>
+      <p id="result">—</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('calculateBtn').addEventListener('click', () => {
+      const lengthFt = parseFloat(document.getElementById('lengthFt').value) || 0;
+      const lengthIn = parseFloat(document.getElementById('lengthIn').value) || 0;
+      const widthFt = parseFloat(document.getElementById('widthFt').value) || 0;
+      const widthIn = parseFloat(document.getElementById('widthIn').value) || 0;
+      const heightFt = parseFloat(document.getElementById('heightFt').value) || 0;
+      const heightIn = parseFloat(document.getElementById('heightIn').value) || 0;
+
+      // Convert inches to feet
+      const length = lengthFt + (lengthIn / 12);
+      const width = widthFt + (widthIn / 12);
+      const height = heightFt + (heightIn / 12);
+
+      const cft = length * width * height;
+
+      document.getElementById('result').textContent = `${cft.toFixed(3)} CFT`;
+    });
+  </script>
+</body>
+</html>
