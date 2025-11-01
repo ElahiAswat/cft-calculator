@@ -35,6 +35,13 @@ body {
   margin: 0;
 }
 
+@media (max-width: 600px) {
+  body {
+    background: #fff !important;
+    color: #222;
+  }
+}
+
 .container {
   background: #fff;
   color: #333;
